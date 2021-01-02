@@ -1,0 +1,141 @@
+:root {
+    --font-family: "Quicksand", "Architects Daughter", "Helvetica", "sans-serif";
+}
+
+main {
+    width: 400px;
+    height: 450px;
+    border-radius: 10px;
+    background: rgba(240,180,135,1);
+    box-shadow: 5px 5px 10px grey, -5px -5px 10px grey;
+    /* centering vertically and horizontally*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    font-family: var(--font-family);
+}
+
+h3 {
+    color: rgba(220, 220, 220, 0.7);
+    font-family: var(--font-family);
+    font-size: 30px;
+}
+
+#header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 200px;
+}
+
+#game-container {
+    width: 350px;
+    height: 400px;
+    text-align: center;
+    background: rgba(40,40,40,1) -webkit-radial-gradient(center, rgba(40,80,60,1), rgba(0,20,20,.6));
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#gameboard {
+    display: none;
+    flex-wrap: wrap;
+    width: 303px;
+    height: 303px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 20px;
+}
+
+.square {
+    height: 100px;
+    width: 97px;
+    background: transparent;
+    font-size: 4.5rem;
+    text-align: center;
+    font-family: var(--font-family);
+    color: rgba(220, 220, 220, 0.7);
+    border: 2px solid rgba(220, 220, 220, 0.7);
+    border-top: none;
+}
+
+/* Remove the edges*/
+#square-0, #square-3, #square-6 {
+    border-left: none;
+}
+
+#square-2, #square-5, #square-8 {
+    border-right: none;
+} 
+
+#square-6, #square-7, #square-8 {
+    border-bottom: none;
+}
+
+#square-1, #square-4, #square-7 {
+    border-left: none;
+    border-right: none;
+}
+
+#player-choice {
+    justify-content: space-evenly;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#one-player, #two-player, #choice-x, #choice-o {
+    font-family: var(--font-family);
+    font-size: 25px;
+    color: rgb(220, 220, 220, 1);
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    margin-left: 5px;
+    outline: none;
+}
+
+#one-player:hover, #two-player:hover, #choice-x:hover, #choice-o:hover, #play-again:hover {
+    border: 2px dashed rgb(220, 220, 220, 0.7);
+    cursor: pointer;
+} 
+
+#game-choice {
+    display: none;
+    height: 50px;
+    width: 100%;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+#play-again {
+    font-family: var(--font-family);
+    height: 35px;
+    display: none;
+    font-size: 20px;
+    color: rgb(220, 220, 220, 1);
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    margin-left: 5px;
+    outline: none;
+}
