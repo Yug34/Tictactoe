@@ -105,6 +105,7 @@ async function playMove(onePlayer, twoPlayer) {
     }
     
     else if (onePlayer) {  
+        // X goes first 
         if (playerTwo.choice === "X") {
             const board = getCurrentBoard();
             if (!Minimax.terminal(board)) {
@@ -112,23 +113,32 @@ async function playMove(onePlayer, twoPlayer) {
                 await sleep(1000);  // sleep for 1 second.
                 let bestAction = Minimax.minimax(board);
                 squares[bestAction].textContent = playerTwo.choice;
+                playerOne.madeMove = false;
+                playerTwo.madeMove = true;
             }
         }
         
         h3.textContent = `${playerOne.choice}'s turn`;
         squares.forEach((square) => square.addEventListener("click", async function() {
             const board = getCurrentBoard();
-            if (!Minimax.terminal(board)) {
-                if (this.textContent === "") {
+            if (!Minimax.terminal(board) && (this.textContent === "")) {
+
+                if (!playerOne.madeMove) {
                     h3.textContent = "Computer Thinking...";
                     this.textContent = playerOne.choice;
-                    
-                    await sleep(1000);  // sleep for 1 second.
+                    playerOne.madeMove = true;
+                    playerTwo.madeMove = false;
+                }
+                
+                await sleep(1000);  // sleep for 1 second.
+                if (!playerTwo.madeMove) {
                     const board = getCurrentBoard();
                     if (!Minimax.terminal(board)) {
                         h3.textContent = `${playerOne.choice}'s turn`;
                         let bestAction = Minimax.minimax(board);
                         squares[bestAction].textContent = playerTwo.choice;
+                        playerOne.madeMove = false;
+                        playerTwo.madeMove = true;
                     }
                 }
                 playMove();
@@ -140,20 +150,19 @@ async function playMove(onePlayer, twoPlayer) {
         h3.textContent = `${playerOne.choice}'s turn`;
         squares.forEach((square) => square.addEventListener("click", function() {
             const board = getCurrentBoard();
-            if (!Minimax.terminal(board)) {
-                if (this.textContent === "") {
-                    if (!playerOne.madeMove) {
-                        this.textContent = playerOne.choice;
-                        playerOne.madeMove = true;
-                        playerTwo.madeMove = false;
-                        h3.textContent = `${playerTwo.choice}'s turn`;
-                    }
-                    else if (!playerTwo.madeMove) {
-                        this.textContent = playerTwo.choice;
-                        playerOne.madeMove = false;
-                        playerTwo.madeMove = true;
-                        h3.textContent = `${playerOne.choice}'s turn`;
-                    }
+            if (!Minimax.terminal(board) && (this.textContent === "")) {
+                
+                if (!playerOne.madeMove) {
+                    this.textContent = playerOne.choice;
+                    playerOne.madeMove = true;
+                    playerTwo.madeMove = false;
+                    h3.textContent = `${playerTwo.choice}'s turn`;
+                }
+                else if (!playerTwo.madeMove) {
+                    this.textContent = playerTwo.choice;
+                    playerOne.madeMove = false;
+                    playerTwo.madeMove = true;
+                    h3.textContent = `${playerOne.choice}'s turn`;
                 }
                 playMove();
             }
